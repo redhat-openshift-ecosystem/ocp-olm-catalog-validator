@@ -24,7 +24,8 @@ Download the binary from the release page.
 
 ### From source-code
 
-Run `make install` to be able to build and install the binary locally. 
+Run `make install` to be able to build and install the binary locally.
+Note that you must have Go 1.16 version installed. 
 
 ## Usage
 
@@ -32,6 +33,15 @@ You can test this validator by running:
 
 ```sh
 $ ocp-olm-catalog-validator <bundle-path> --optional-values="range==v4.8" --output=json-alpha1
+```
+
+Following an example of an Operator bundle which uses the removed APIs in 1.22 and is not configured accordingly:
+
+```sh
+$ ocp-olm-catalog-validator bundle/ --optional-values="file=bundle/metadata/annotations.yaml"
+WARN[0000] Warning: Value memcached-operator.v0.0.1: this bundle is using APIs which were deprecated and removed in v1.22. More info: https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22. Migrate the API(s) for CRD: (["memcacheds.cache.example.com"]) 
+ERRO[0000] Error: Value : (memcached-operator.v0.0.1) olm.maxOpenShiftVersion csv.Annotations not specified with an OCP version lower than 4.9. This annotation is required to prevent the user from upgrading their OCP cluster before they have installed a version of their operator which is compatible with 4.9. For further information see https://docs.openshift.com/container-platform/4.8/operators/operator_sdk/osdk-working-bundle-images.html#osdk-control-compat_osdk-working-bundle-images 
+ERRO[0000] Error: Value : (memcached-operator.v0.0.1) this bundle is using APIs which were deprecated and removed in v1.22. More info: https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22. Migrate the APIs for this bundle is using APIs which were deprecated and removed in v1.22. More info: https://kubernetes.io/docs/reference/using-api/deprecation-guide/#v1-22. Migrate the API(s) for CRD: (["memcacheds.cache.example.com"]) or provide compatible version(s) via the labels. (e.g. LABEL com.redhat.openshift.versions='4.6-4.8') 
 ```
 
 ## How to check what is validated with this project?
