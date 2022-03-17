@@ -268,8 +268,6 @@ func checkOCPLabel(checks OpenShiftOperatorChecks) OpenShiftOperatorChecks {
 			checks.errs = append(checks.errs, fmt.Errorf(deprecateOcpLabelMsg1_22,
 				checks.deprecateAPIsMsg,
 				ocpLabel))
-		} else {
-			checks.warns = append(checks.warns, fmt.Errorf("unable to find %s configuration", ocpLabel))
 		}
 	}
 

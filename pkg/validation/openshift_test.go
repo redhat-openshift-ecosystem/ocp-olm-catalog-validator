@@ -228,17 +228,9 @@ func Test_checkOCPLabelsWithHasDeprecatedAPIs(t *testing.T) {
 			},
 		},
 		{
-			name:        "should warn when the OCP label is not found",
-			wantError:   false,
-			wantWarning: true,
-			args: args{
-				indexPath: "./testdata/dockerfile/bundle_without_label.Dockerfile",
-			},
-		},
-		{
 			name:        "should fail when the the index path is an invalid path",
 			wantError:   true,
-			wantWarning: true,
+			wantWarning: false,
 			args: args{
 				indexPath: "./testdata/dockerfile/invalid",
 			},
